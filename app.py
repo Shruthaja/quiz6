@@ -17,8 +17,7 @@ driver = '{ODBC Driver 17 for SQL Server}'
 
 conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}')
 cursor = conn.cursor()
-f=open("result",'w')
-f.write("")
+
 d={}
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -55,30 +54,36 @@ def game():
                 correct='ok'
                 f=open('result','a')
                 f.write("{"+name+":q1}\n")
-                return render_template("game.html",correct=correct,username=username)
+                return render_template("game.html",correct=correct,username=name)
         if (qno == 'q2'):
             if (ans == '100'):
                 correct = 'ok'
                 f=open('result','a')
                 f.write("{"+name+":q2}\n")
-                return render_template("game.html", correct=correct, username=username)
+                return render_template("game.html", correct=correct, username=name)
         if (qno == 'q3'):
             if (ans == '300'):
                 correct = 'ok'
                 f=open('result','a')
                 f.write("{"+name+":q3}\n")
-                return render_template("game.html", correct=correct, username=username)
+                return render_template("game.html", correct=correct, username=name)
         else:
             correct='NO'
-            return render_template("game.html", correct=correct, username=username)
+            return render_template("game.html", correct=correct, username=name)
     return render_template("game.html",correct="")
 
 @app.route('/judge', methods=['GET', 'POST'])
 def judge():
     result=[]
-    f=open('result','r').read()
-    f=f.split()
-    return render_template("judge.html",result=f)
+    if request.method=="POST":
+        query="truncate table play;"
+        cursor.execute(query).commit()
+        f = open("result", 'w')
+        f.write("")
+        return render_template("judge.html",result=result)
+    f1 = open('result', 'r').read()
+    f1 = f1.split()
+    return render_template("judge.html",result=f1)
 
 if __name__ == '__main__':
     app.run(debug=True)
