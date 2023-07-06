@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz6</title>
+</head>
+<body>
+{{username}}
+
+
+<form action="/game" method="post">
+    <label for="questions">Choose a question:</label>
+
+<select name="question" id="questions">
+  <option value="q1">1+1</option>
+  <option value="q2">49+51</option>
+  <option value="q3">149+159</option>
+</select>
+    <input name="answer" placeholder="Enter answer">
+    <input name="name" placeholder="Enter name">
+
+    <input type="submit">
+</form>
+
+{{correct}}
+{{score}}
+
+</body>
+<style>
+body{
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    to right,
+    pink 0%,
+    pink 50%,
+    paleturquoise 50%,
+    paleturquoise 100%
+  );
+}
+</style>
+</html>
