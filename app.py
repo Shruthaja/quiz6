@@ -12,7 +12,7 @@ Session(app)
 server = 'assignmnet6.database.windows.net'
 database = 'testDB'
 username = 'shruthaja'
-password = 'mattu4-12'
+password = ''
 driver = '{ODBC Driver 17 for SQL Server}'
 
 conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}')
